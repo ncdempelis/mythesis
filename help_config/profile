@@ -23,4 +23,5 @@ fi
 
 export LC_ALL="el_GR.UTF-8"
 
-TZ='Europe/Athens'; export TZ
+#TZ='Europe/Athens'; export TZ
+export TZ='Europe/Athens'

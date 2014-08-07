@@ -1,0 +1,6 @@
+README.txt [x]
+applications.sh [x]
+Vagrantfile [x]
+users.sql [x]
+help_config/* [x]
+project/* [x]

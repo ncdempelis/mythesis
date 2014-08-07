@@ -17,12 +17,12 @@ dpkg-reconfigure locales
 
 #install mysql apache php phpmyadmin with default passwd root. You can run dpkg-reconfigure to change  
 export DEBIAN_FRONTEND=noninteractive
-debconf-set-selections /vagrant/help-config/debconf.txt
+debconf-set-selections /vagrant/help_config/debconf.txt
 apt-get install -y mysql-server
 apt-get install -y phpmyadmin
 
 #copy profile
-cp /vagrant/help-config/profile /home/vagrant/.profile
+cp /vagrant/help_config/profile /home/vagrant/.profile
 
 #set up diplomatiki
 #1. create appropriate .conf for apache2 HOST & VERSION SPECIFIC!!!! & then restart apache

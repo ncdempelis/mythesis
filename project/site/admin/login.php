@@ -1,6 +1,13 @@
 <?php
 require('../includes/config.php'); 
-if(logged_in()) {header('Location: '.DIRADMIN);}
+if(logged_in()) {
+	$host = $_SERVER['HTTP_HOST'];
+	if (isset($_ENV['OPENSHIFT_APP_NAME'] )) {
+		header('Location: ' . $host.'/project/site/'.DIRADMIN);
+	} else {
+		header('Location: '. $host.DIRADMIN);
+	}
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

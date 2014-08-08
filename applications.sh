@@ -23,6 +23,7 @@ apt-get install -y phpmyadmin
 
 #copy profile
 cp /vagrant/help_config/profile /home/vagrant/.profile
+tr -d 'r' < /home/vagrant/.profile > /home/vagrant/.profile
 
 #set up diplomatiki
 #1. create appropriate .conf for apache2 HOST & VERSION SPECIFIC!!!! & then restart apache

@@ -12,7 +12,7 @@ if(!$conn){
 	die( "Sorry! There seems to be a problem connecting to our database.");
 }
 mysql_query("SET NAMES UTF8");
-if (isset($_ENV['OPENSHIFT_APP_NAME'] ) {
+if (isset($_ENV['OPENSHIFT_APP_NAME'] )) {
 	define ('DIR', '/project/site/');
 	define ('DIRAMDIN', '/project/site/admin/');
 } else { 	

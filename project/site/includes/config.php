@@ -12,6 +12,35 @@ if(!$conn){
 	die( "Sorry! There seems to be a problem connecting to our database.");
 }
 mysql_query("SET NAMES UTF8");
+
+
+/*
+ * Δημιούργησε τις σταθερές DIR και DIRADMIN 
+ * το REQUEST_URI αφορά το script που μας έκανε include / require 
+ * τα script που μας καλούν include είναι είτε στο project / είτε στο project /admin
+ */
+$path = pathinfo($_SERVER['REQUEST_URI']);
+$app_root ='';
+if (empty($path['extension']) ){
+	/* this was included by index which was called implicit */
+	$app_root = $path['dirname'];
+	if (strlen($app_root) > 1 ) {
+		// we have /somepath 
+		$app_root .= '/';
+	}
+	$app_root .= $path['basename'].'/';
+} else {
+	/* this was included by /somepath/sthing.php  so we can safely use dirname on it*/
+	$app_root = $path['dirname'].'/';
+}
+if (basename($app_root) == 'admin') {
+	$app_root = dirname($app_root). '/';
+}
+define ( 'DIR', $app_root);
+define ( 'DIRADMIN', $app_root . 'admin/');
+unset ($path);
+unset ($app_root);
+/*
 if (isset($_ENV['OPENSHIFT_APP_NAME'] )) {
 	define ('DIR', '/project/site/');
 	define ('DIRAMDIN', '/project/site/admin/');
@@ -19,7 +48,7 @@ if (isset($_ENV['OPENSHIFT_APP_NAME'] )) {
 	define('DIR','/diplomatiki/');
 	define('DIRADMIN', '/diplomatiki/admin/');
 }
-
+*/
 define('SITETITLE','Πολικότητα επιθέτων');
 
 define('included', 1);

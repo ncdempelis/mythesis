@@ -17,9 +17,9 @@ $search = isset($_POST["search"]) ?$_POST["search"] : "";
         <div id="title">Πολικότητα Επιθέτων</div>
         
         <div id="linkGroup">
-            <div class="link"><a href="index.html">Αρχική</a></div>
+            <div class="link"><a href="index.php">Αρχική</a></div>
              <div class="link"><a href="admin/">Διαχείριση</a></div>
-            <div class="link"><a href="contactus.html">Επικοινωνία</a></div>
+            <div class="link"><a href="contactus.php">Επικοινωνία</a></div>
         </div>
         
         <div id="blueBox"> 
@@ -61,10 +61,9 @@ $search = isset($_POST["search"]) ?$_POST["search"] : "";
 							<td>$adjective->definition</td>
 							<td>" . implode(",", $adjective->examples) ."</td>
 							<td colspan='3'>
-								<iframe frameborder=0 width='150' height='100' src='" . DIR  ."ranking.php?code=$code'></iframe>
-								
+								<!-- <iframe frameborder=0 width='150' height='100' src='" . DIR  ."ranking.php?code=$code'></iframe> -->
+								<img src='". DIR . "ranking.php?code=$code'>
 							</td>";		
-
 					echo "</tr>";
 					$i++;
 				}

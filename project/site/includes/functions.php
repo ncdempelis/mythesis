@@ -196,7 +196,33 @@ function addUser($username,$name,$password,$type ){
 	else 
 		return true;
 }
-
+function showAdjectives($page, $show=5) {
+	$adjective_list = array();
+	$downlimit=($page -1 ) * $show;
+	$uplimit = $page * $show -1;
+	$sql = "SELECT * FROM adjectives LIMIT " . $downlimit .", " . $uplimit;
+	// var_dump($sql); exit;
+	$result = mysql_query($sql) or die(mysql_error());
+	
+	while($row = mysql_fetch_array($result))
+	{
+		$adjective=new Adjective();
+		$adjective->code=$row['code'];
+		$adjective->adjective=$row['adjective'];
+		$adjective->definition=$row['definition'];
+		
+		$sql="SELECT example FROM examples where code='$adjective->code' ";
+		$res = mysql_query($sql);
+		$i=0;
+		while($myrow = mysql_fetch_array($res))
+		{
+			$adjective->examples[$i] = $myrow['example'];
+			$i++;
+		}
+		$adjective_list[]=$adjective;		
+	}
+	return $adjective_list;
+}
 function getAdjectives($search){
 	$search = mysql_escape_string($search);
 

@@ -2,6 +2,7 @@
 require('./includes/config.php'); 
 
 $search = isset($_POST["search"]) ?$_POST["search"] : "";
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -33,15 +34,20 @@ $search = isset($_POST["search"]) ?$_POST["search"] : "";
 				<input type="submit" name="submit" value="Αναζήτηση" class="button" /></p>
 			</form>
 			<?php
-			if(   $search !='' ) 
-			{
+			if(   $search !='' ) {
 				$adjectives = getAdjectives( $search );
+				$header = "Σχετικά επίθετα";
+			} else {
+				$adjectives = showAdjectives($page);
+				$header = "Λίστα Επιθέτων";
+			}
 			?>
 			<br/>
-			<div style='max-height:500px;overflow-y:auto;'>
+			<!-- <div style='max-height:500px;overflow-y:auto;'> -->
+			<div>
 			<table cellpadding='5px'>
 				<tr>
-					<th colspan='6' ><h4>Σχετικά επίθετα </h4></th>
+					<th colspan='6'><h4><?php echo $header; ?></h4></th>
 				</tr>
 				<tr>
 					<!-- <th><strong>Κωδικός</strong></th> -->
@@ -67,13 +73,18 @@ $search = isset($_POST["search"]) ?$_POST["search"] : "";
 					echo "</tr>";
 					$i++;
 				}
+				if ($search=='') {
+					if ($page == '') $page=1;
+				?>
+				<tr><td><a href="?page=<?php $prev_page = ($page -1 )>0 ? $page-1: 1; echo $prev_page; ?>">&lt;</a></td>
+				<td colspan="4">&nbsp;</td>
+				<td><a href="?page=<?php echo $page+1;?>">&gt;</a></td>
+				<?php
+				}
 				?>
 			</table>
 			</div>
 			
-			<?php
-			}
-			?>
 			  <br/>
             </div>
             <div id="footer">  </div>

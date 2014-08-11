@@ -3,6 +3,8 @@ require('./includes/config.php');
 
 $search = isset($_POST["search"]) ?$_POST["search"] : "";
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$total = countAdjectives();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -25,10 +27,18 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
         
         <div id="blueBox"> 
           <div id="header"></div>
-          <div class="contentTitle">Καλωσήρθατε</div>
+		  <?php 
+				if ($total ==0 ) {
+					$str = 'Δεν υπάρχουν ΑΚΟΜΗ επίθετα στη βάση μας.';
+				} else if ($total == 1) {
+					$str = 'Υπάρχει '. $total . ' επίθετο στη βάση μας';
+				} else {
+					$str = 'Υπάρχουν '.$total . ' επίθετα στη βάση μας';
+				}
+			?>
+          <div class="contentTitle">Καλωσήρθατε :: <?php echo $str; ?></div>
             <div class="pageContent">
-			
-			 <form action="" method="post">
+			    <form action="" method="post">
 				<h3>Αναζήτηση Επιθέτων</h3>
 				<p>Επίθετο:<input name="search" type="text" value="<?php echo $search ?>" size="50" />
 				<input type="submit" name="submit" value="Αναζήτηση" class="button" /></p>
@@ -76,9 +86,25 @@ $page = isset($_GET['page']) ? $_GET['page'] : 1;
 				if ($search=='') {
 					if ($page == '') $page=1;
 				?>
-				<tr><td><a href="?page=<?php $prev_page = ($page -1 )>0 ? $page-1: 1; echo $prev_page; ?>">&lt;</a></td>
-				<td colspan="4">&nbsp;</td>
-				<td><a href="?page=<?php echo $page+1;?>">&gt;</a></td>
+				<tr>
+				<td colspan="6" style="text-align: center;">
+				<a href="?page=1">&lt;&lt;</a>&nbsp;
+				<a href="?page=<?php $prev_page = ($page -1 )>0 ? $page-1: 1; echo $prev_page; ?>">&lt;</a> | 
+				<?php
+					$total_pages = $total / NUM_OF_ADJ_TO_SHOW;
+					settype($total_pages, 'INTEGER');
+					if ($total % NUM_OF_ADJ_TO_SHOW > 0 ) {
+						$total_pages++;
+					} 
+					if ($page + 1 > $total_pages ) {
+						$next_page = $page;
+					} else {
+						$next_page = $page +1;
+					}
+				?>
+				<a href="?page=<?php echo $next_page;?>">&gt;</a>&nbsp;
+				<a href="?page=<?php echo $total_pages;?>">&gt;&gt;</a>
+				</td>
 				<?php
 				}
 				?>

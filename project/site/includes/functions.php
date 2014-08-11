@@ -196,6 +196,14 @@ function addUser($username,$name,$password,$type ){
 	else 
 		return true;
 }
+
+function countAdjectives() {
+	$sql = "SELECT COUNT(*) FROM adjectives";
+	$result = mysql_query($sql) or die (mysql_error());
+	$total = mysql_fetch_row($result);
+
+	return $total[0];
+}
 function showAdjectives($page, $show=5) {
 	$adjective_list = array();
 	$downlimit=($page -1 ) * $show;

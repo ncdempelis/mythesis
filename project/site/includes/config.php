@@ -28,7 +28,11 @@ if (empty($path['extension']) ){
 		// we have /somepath 
 		$app_root .= '/';
 	}
-	$app_root .= $path['basename'].'/';
+	if ($path['basename'][0]!='?') //do not include GET variables
+		$app_root .= $path['basename'].'/';
+		
+	if ($app_root[strlen($app_root)-1] != '/')
+		$app_root .= '/';
 } else {
 	/* this was included by /somepath/sthing.php  so we can safely use dirname on it*/
 	$app_root = $path['dirname'].'/';
@@ -50,7 +54,7 @@ if (isset($_ENV['OPENSHIFT_APP_NAME'] )) {
 }
 */
 define('SITETITLE','Πολικότητα επιθέτων');
-
+define('NUM_OF_ADJ_TO_SHOW', 5);
 define('included', 1);
 
 define('ADJECTIVE_MAX_VOTING', 20);

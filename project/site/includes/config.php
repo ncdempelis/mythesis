@@ -79,6 +79,12 @@ class Example
 	public $example;
 
 }
-
+class Comment
+{
+	public $id;
+	public $from;
+	public $subject;
+	public $comment;
+}
 include('functions.php');
 ?>

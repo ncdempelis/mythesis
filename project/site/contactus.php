@@ -1,14 +1,15 @@
 ﻿<?php
 require('./includes/config.php'); 
 
-$email = isset($_POST['email']) ? $_POST['email'] : '';
+$from = isset($_POST['from']) ? $_POST['from'] : '';
 $subject = isset($_POST['subject']) ? $_POST['subject']: '';
 $comment = isset($_POST['comment']) ? $_POST['comment']: '';
 
-if (empty($email) || empty( $subject) || empty($comment)) {
+if (empty($from) || empty( $subject) || empty($comment)) {
 	$error_message='Παρακαλώ συμπληρώστε όλα τα πεδία.';
 	$show_submit = TRUE;
 } else {
+	addComment($from, $subject, $comment);
 	$error_message='Καταχωρήστηκαν τα παρακάτω στοιχεία : ';
 	$show_submit = FALSE;
 }
@@ -39,10 +40,10 @@ if (empty($email) || empty( $subject) || empty($comment)) {
 			
 			 <form action="" method="post">
 				<p><?php echo $error_message; ?></p>
-				<p>email: <input name="email" type="text" value="<?php echo $email; ?>" size="50" /></p>
-				<p>Θέμα: <input name="subject" type="text" value="<?php echo $subject; ?>" size="50" /></p>
+				<p>Όνομα:&nbsp;<input name="from" type="text" value="<?php echo $from; ?>" size="50" /></p>
+				<p>Θέμα:&nbsp;&nbsp;&nbsp;<input name="subject" type="text" value="<?php echo $subject; ?>" size="50" /></p>
 				<p><hr></p>
-				<p>Σχόλιο: <input name="comment" type="textarea" value="<?php echo $comment; ?>" /></p>
+				<p>Σχόλιο:&nbsp;<input name="comment" type="textarea" value="<?php echo $comment; ?>" /></p>
 				<?php  
 				if ($show_submit) { ?>
 					<p><input type="submit" name="submit" value="Καταχώρηση" class="button" /></p>

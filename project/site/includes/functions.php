@@ -88,6 +88,37 @@ function errors($error){
 	}
 } 
 
+function addComment($from, $subject, $comment){
+	$from = mysql_escape_string($from);
+	$subject = mysql_escape_string($subject);
+	$comment = mysql_escape_string($comment);
+	
+	$sql = "INSERT INTO `contactus`( `from`, `subject`, `comment`) VALUES ('" . $from ."', '". $subject . "', '". $comment ."')";
+	$result  = mysql_query($sql)  or die(mysql_error());
+	
+	if(!$result)
+		return false;
+	else 
+		return true;
+}
+function getComments()
+{
+	$comment_list = array();
+	$sql = "SELECT * FROM`contactus`";
+	$result = mysql_query($sql);
+	$i=0;
+	while ($row = mysql_fetch_array($result)) {
+		$comment = new Comment();
+		$comment->id = $row['id'];
+		$comment->from = $row['from'];
+		$comment->subject = $row['subject'];
+		$comment->comment = $row['comment'];
+		
+		$comment_list[$i] = $comment;
+		$i++;
+	}
+	return $comment_list;
+}
 function getUsers()
 {
 	$user_list=array();

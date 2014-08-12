@@ -88,20 +88,26 @@ $total = countAdjectives();
 				?>
 				<tr>
 				<td colspan="6" style="text-align: center;">
-				<a href="?page=1">&lt;&lt;</a>&nbsp;
-				<a href="?page=<?php $prev_page = ($page -1 )>0 ? $page-1: 1; echo $prev_page; ?>">&lt;</a> | 
 				<?php
 					$total_pages = $total / NUM_OF_ADJ_TO_SHOW;
 					settype($total_pages, 'INTEGER');
-					if ($total % NUM_OF_ADJ_TO_SHOW > 0 ) {
+					
+					if ($total % NUM_OF_ADJ_TO_SHOW > 0) { 
 						$total_pages++;
-					} 
-					if ($page + 1 > $total_pages ) {
-						$next_page = $page;
+					}
+					if ($page==1) {
+						$prev_page = 1;
 					} else {
-						$next_page = $page +1;
+						$prev_page = $page-1;
+					}	
+					if ($page == $total_pages) { 
+						$next_page = $total_pages;
+					} else { 
+						$next_page = $page + 1;
 					}
 				?>
+				<a href="?page=1">&lt;&lt;</a>&nbsp;
+				<a href="?page=<?php echo $prev_page; ?>">&lt;</a> | 
 				<a href="?page=<?php echo $next_page;?>">&gt;</a>&nbsp;
 				<a href="?page=<?php echo $total_pages;?>">&gt;&gt;</a>
 				</td>

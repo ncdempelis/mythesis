@@ -204,11 +204,10 @@ function countAdjectives() {
 
 	return $total[0];
 }
-function showAdjectives($page, $show=5) {
+function showAdjectives($page, $show=NUM_OF_ADJ_TO_SHOW) {
 	$adjective_list = array();
-	$downlimit=($page -1 ) * $show;
-	$uplimit = $page * $show -1;
-	$sql = "SELECT * FROM adjectives LIMIT " . $downlimit .", " . $uplimit;
+	$start = ($page - 1) * NUM_OF_ADJ_TO_SHOW;
+	$sql = "SELECT * FROM adjectives LIMIT " . $start .", " . $show;
 	// var_dump($sql); exit;
 	$result = mysql_query($sql) or die(mysql_error());
 	

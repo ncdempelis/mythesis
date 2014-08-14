@@ -88,8 +88,8 @@ if(isset($_POST["search"]) )
 					<td>$adjective->definition</td>
 					<td>" . implode(",", $adjective->examples) ."</td>
 					<td colspan='3'>
-						<iframe frameborder=0 width='150' height='100' src='" . DIR  ."ranking.php?code=$code'></iframe>
-						
+					<!--	<iframe frameborder=0 width='150' height='100' src='" . DIR  ."ranking.php?code=$code'></iframe> -->
+							<img src='" . DIR . "ranking.php?code=$code' />
 					</td>";		
 					
 			

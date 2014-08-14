@@ -17,9 +17,6 @@ if(isset($_GET['logout'])){
 <script src="<?php echo DIR;?>js/jquery.ui.core.js"></script>
 <script src="<?php echo DIR;?>js/jquery.ui.widget.js"></script>
 
-
-
-
 <script language="JavaScript" type="text/javascript">
 	
 	function deluser(username, name)
@@ -52,20 +49,16 @@ if(isset($_GET['logout'])){
 <body>
 
 <div id="wrapper">
-
-
-<div id="navigation">
-	<ul class="menu">
-		<li><a href="<?php echo DIRADMIN;?>">Κεντρική Σελίδα</a></li>	
-		<li><a href="<?php echo DIRADMIN;?>adjectives.php">Επίθετα</a></li>	
-<?php
-if (isAdvanced()) 
-	echo  "<li><a href='" .DIRADMIN . "users.php'>Χρήστες</a></li>";
-	echo  "<li><a href='" .DIRADMIN . "contactus.php'>Σχόλια</a><li>";
-
-?>	
-		<li><a href="<?php echo DIRADMIN;?>?logout">Αποσύνδεση</a></li>
-	</ul>
-	
-</div>
-
+	<div id="navigation">
+		<ul class="menu">
+			<li><a href="<?php echo DIRADMIN;?>">Κεντρική Σελίδα</a></li>	
+			<li><a href="<?php echo DIRADMIN;?>adjectives.php">Επίθετα</a></li>	
+			<?php
+				if (isAdvanced()) 
+					echo  "<li><a href='" .DIRADMIN . "users.php'>Χρήστες</a></li>";
+				
+				echo  "<li><a href='" .DIRADMIN . "contactus.php'>Σχόλια</a><li>";
+			?>	
+			<li><a href="<?php echo DIRADMIN;?>?logout">Αποσύνδεση</a></li>
+		</ul>
+	</div><!-- navigation div -->

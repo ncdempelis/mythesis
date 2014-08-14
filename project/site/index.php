@@ -29,14 +29,15 @@ $total = countAdjectives();
           <div id="header"></div>
 		  <?php 
 				if ($total ==0 ) {
-					$str = 'Δεν υπάρχουν ΑΚΟΜΗ επίθετα στη βάση μας.';
+					$str = 'Δεν υπάρχουν ΑΚΟΜΗ ορισμοί επιθέτων στη βάση μας.';
 				} else if ($total == 1) {
-					$str = 'Υπάρχει '. $total . ' επίθετο στη βάση μας';
+					$str = 'Υπάρχει '. $total . ' ορισμός επιθέτου στη βάση μας';
 				} else {
-					$str = 'Υπάρχουν '.$total . ' επίθετα στη βάση μας';
+					$str = 'Υπάρχουν '.$total . ' ορισμοί επιθέτων στη βάση μας';
 				}
 			?>
-          <div class="contentTitle">Καλωσήρθατε :: <?php echo $str; ?></div>
+          <div class="contentTitle" style="text-align: center;">Καλωσήρθατε </div>
+		  <div class="contentTitle" style="text-align:center; font-size: 16px;"><?php echo $str; ?></div>
             <div class="pageContent">
 			    <form action="" method="post">
 				<h3>Αναζήτηση Επιθέτων</h3>

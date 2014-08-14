@@ -2,6 +2,20 @@
 require('./includes/config.php'); 
 include_once ('./simplehtmldom_1_5/simple_html_dom.php');
 
+if (count($_POST)) {
+	$name = $_POST['name'];
+	$definition = $_POST['definition'];
+	$examples = $_POST['examples'];
+	$code = $_POST['code'];
+
+	$res= addAdjective($code,$name,$definition ,$examples);
+	
+	if( $res>0 ) {
+		$_SESSION['success'] = 'Οι αλλαγές αποθηκεύτηκαν με επιτυχία';	
+			
+	}
+}
+
 $fh = fopen("adjectives.txt", "r");
 if ($fh == false) {
 	exit;
@@ -12,7 +26,7 @@ if (isset($_GET['pos']) ){
 }
 $ln='';
 $str='';
-$prev_position = ftell($fh);
+
 while (!feof($fh) && $read_more) {
 	$ln = fgets($fh);
 	$str .=$ln;
@@ -25,6 +39,12 @@ fclose($fh);
 $html = new simple_html_dom();
 $html->load($str);
 
+/*
+ * id of adjective 
+ */
+ $ret = $html->find('dl',0);
+ $code = $ret->id;
+ 
 /*
  *  Επίθετο και καταλήξεις
  *  Πρόβλημα με αβασίλευτος <sup>1</sup>
@@ -84,8 +104,8 @@ unset($ret);
 <tr><td>Html</td><td colspan="5"><?php echo htmlspecialchars($str); ?></td></tr>
 <tr><td>Επίθετο</td><td><?php echo $adj[0]; ?></td><td>Κατάληξη στο θηλ.</td><td><?php echo $adj[1]; ?></td><td>Κατάληξη στο ουδ.</td><td><?php echo $adj[2];?></td></tr>
 <tr>
-	<td colspan="3" style="text-align: left;"><a href="?pos=<?php echo $prev_position; ?>">Προηγούμενο</a></td>
-	<td colspan="3" style="text-align: right;"><a href="?pos=<?php echo $cur_position; ?>">Επόμενο</a></td>
+<!--	<td colspan="3" style="text-align: left;"><a href="?pos=<?php echo $prev_position; ?>">Προηγούμενο</a></td> -->
+	<td colspan="6" style="text-align: center;"><a href="?pos=<?php echo $cur_position; ?>">Επόμενο</a></td>
 </tr>
 </table>
 <br>
@@ -94,12 +114,19 @@ unset($ret);
 $i=0;
 foreach($adjdefs as $adjdef) {
 ?>
+			<div id="<?php echo $i;?>">
+			<form method="post" name="<?php echo $i;?>" action="";>
+			<input type="hidden" name="name" value="<?php echo $adj[0];?>" />
+<!--			<input type="hidden" name="hide" value="<?php echo $hidden;?>" /> -->
 			<table style="border: solid thin black; margin-top: 5px;">
 			<tr><th colspan="2" style="text-align: center;"><?php echo $adj[0]; ?></th></tr>
-			<tr><th>Ορισμός</th><td><input type="text" value="<?php echo $adjdef; ?>" size="150" /></td></tr>
-			<tr><th>Παράδειγμα</th><td><input type="text" value="<?php echo $examples[$i]; ?>" size="150" /></td></tr>
-			<tr><td colspan="2" style="text-align: right;"><input type="button" value="Αποθήκευση" /></td></tr>
+			<tr><th>Code</th><td><input type="text" name="code" value="<?php echo $code .'_'.$i; ?>" /></td></tr>
+			<tr><th>Ορισμός</th><td><input type="text" name="definition" value="<?php echo $adjdef; ?>" size="150" /></td></tr>
+			<tr><th>Παράδειγμα</th><td><input type="text" name="examples" value="<?php echo $examples[$i]; ?>" size="150" /></td></tr>
+			<tr><td colspan="2" style="text-align: right;"><input type="submit" value="Αποθήκευση" /></td></tr>
 			<table>
+			</form>
+			</div>
 <?php
 	$i++;
 }

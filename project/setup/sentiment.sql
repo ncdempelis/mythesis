@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Φιλοξενητής: localhost
--- Χρόνος δημιουργίας: 07 Αυγ 2014 στις 11:31:28
--- Έκδοση Διακομιστή: 5.5.35
--- Έκδοση PHP: 5.5.11-2+deb.sury.org~precise+2
+-- Χρόνος δημιουργίας: 14 Αυγ 2014 στις 19:14:54
+-- Έκδοση Διακομιστή: 5.5.38
+-- Έκδοση PHP: 5.3.10-1ubuntu3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,6 +32,20 @@ CREATE TABLE IF NOT EXISTS `adjectives` (
   `definition` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Δομή Πίνακα για τον Πίνακα `contactus`
+--
+
+CREATE TABLE IF NOT EXISTS `contactus` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `from` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `comment` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
 -- --------------------------------------------------------
 

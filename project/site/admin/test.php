@@ -1,5 +1,5 @@
 <?php
-require('./includes/config.php'); 
+require('../includes/config.php'); 
 include_once ('./simplehtmldom_1_5/simple_html_dom.php');
 
 if (count($_POST)) {

@@ -290,7 +290,7 @@ function getRanking($code){
 
 	$rankings = array(0,0,0,0,0);
 	$code = mysql_escape_string($code);
-	$sql="SELECT count( * ) as count , rank FROM `rankings`  WHERE code =$code GROUP BY rank ";
+	$sql="SELECT count( * ) as count , rank FROM `rankings`  WHERE code ='$code' GROUP BY rank ";
 	$result = mysql_query($sql);
 	$i=2;
 	$votes=0;
@@ -329,7 +329,7 @@ function getAdjectivesForVoting($username){
 	$username = mysql_escape_string($username);
 
 	$adjective_list=array();
-	$sql="SELECT * FROM `adjectives` WHERE code not in ( select code from rankings where username='$username') LIMIT 1000 ";
+	$sql="SELECT * FROM `adjectives` WHERE code not in ( select code from rankings where username='$username') LIMIT 1000 " ;
 	
 	$result = mysql_query($sql) or die(mysql_error());
 	

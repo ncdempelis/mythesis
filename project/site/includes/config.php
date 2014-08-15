@@ -17,7 +17,7 @@ mysql_query("SET NAMES UTF8");
 /*
  * Δημιούργησε τις σταθερές DIR και DIRADMIN 
  * το REQUEST_URI αφορά το script που μας έκανε include / require 
- * τα script που μας καλούν include είναι είτε στο project / είτε στο project /admin
+ * τα script που μας κάνούν include είναι είτε στο project / είτε στο project /admin
  */
 $path = pathinfo($_SERVER['REQUEST_URI']);
 $app_root ='';
@@ -40,6 +40,16 @@ if (empty($path['extension']) ){
 if (basename($app_root) == 'admin') {
 	$app_root = dirname($app_root). '/';
 }
+/* Παραδοχή: το admin/ στο project root είναι το τελευταίο directory με αυτό το όνομα στο path */
+if ( ($pos = strpos($app_root, 'admin'))!= false ) {
+	do { 
+		$cur = strpos($app_root, 'admin', $pos + strlen('admin'));
+			if ($cur != false )
+				$pos = $cur;
+	} while ($cur!= false);
+	$app_root = substr($app_root,0, $pos);
+}
+
 define ( 'DIR', $app_root);
 define ( 'DIRADMIN', $app_root . 'admin/');
 unset ($path);
@@ -57,7 +67,7 @@ define('SITETITLE','Πολικότητα επιθέτων');
 define('NUM_OF_ADJ_TO_SHOW', 5);
 define('included', 1);
 
-define('ADJECTIVE_MAX_VOTING', 20);
+define('ADJECTIVE_MAX_VOTING', 5);
 
 class Adjective
 {

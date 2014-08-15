@@ -54,10 +54,10 @@ if(isset($_GET['logout'])){
 			<li><a href="<?php echo DIRADMIN;?>">Κεντρική Σελίδα</a></li>	
 			<li><a href="<?php echo DIRADMIN;?>adjectives.php">Επίθετα</a></li>	
 			<?php
-				if (isAdvanced()) 
+				if (isAdvanced()) { 
 					echo  "<li><a href='" .DIRADMIN . "users.php'>Χρήστες</a></li>";
-				
-				echo  "<li><a href='" .DIRADMIN . "contactus.php'>Σχόλια</a><li>";
+					echo  "<li><a href='" .DIRADMIN . "contactus.php'>Σχόλια</a><li>";
+				}
 			?>	
 			<li><a href="<?php echo DIRADMIN;?>?logout">Αποσύνδεση</a></li>
 		</ul>

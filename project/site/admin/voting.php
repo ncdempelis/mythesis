@@ -17,9 +17,11 @@ $username = $_SESSION['username'];
 include('header.php');
 
 if(isset($_POST['submit'])){
-
+	
 	$codes = $_POST['code'];
 	$votes = $_POST['vote'];
+	// var_dump($codes);
+	// var_dump($votes);
 	
 	for($i=0;$i<count($codes);$i++){
 		if(is_numeric($votes[$i]))
@@ -87,7 +89,8 @@ if(isset($_POST['submit'])){
 		?>
 	</table>
 	<input type="submit" name="submit" value="Αποστολή" class="button" />
-	<a href="" onclick="window.history.back();return false;" class="button">Επιστροφή</a>
+	<!-- onclick = "window.history.back() ; return false; " --> 
+	<a href="adjectives.php"  class="button">Επιστροφή</a>
 	</form>
 	<?php
 	}

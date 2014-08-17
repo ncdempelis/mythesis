@@ -112,6 +112,26 @@ unset($ret);
 <center>
 <?php
 $i=0;
+var_dump($adjdefs);
+var_dump(count($adjdefs));
+var_dump(is_array($adjdefs));
+if (count($adjdefs) ==  0 ) {
+	/* parse error */
+?>
+			<div id="<?php echo $i;?>">
+			<form method="post" name="<?php echo $i;?>" action="";>
+			<input type="hidden" name="name" value="<?php echo $adj[0];?>" />
+			<table style="border: solid thin black; margin-top: 5px;">
+			<tr><th colspan="2" style="text-align: center;"><?php echo $adj[0]; ?></th></tr>
+			<tr><th>Code</th><td><input type="text" name="code" value="<?php echo $code ; ?>" /></td></tr>
+			<tr><th>Ορισμός</th><td><input type="text" name="definition" value="" size="150" /></td></tr>
+			<tr><th>Παράδειγμα</th><td><input type="text" name="examples" value="" size="150" /></td></tr>
+			<tr><td colspan="2" style="text-align: right;"><input type="submit" value="Αποθήκευση" /></td></tr>
+			<table>
+			</form>
+			</div>	
+<?php
+}
 foreach($adjdefs as $adjdef) {
 ?>
 			<div id="<?php echo $i;?>">

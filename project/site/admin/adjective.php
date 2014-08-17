@@ -38,6 +38,8 @@ if(isset($_POST['submit'])){
 
 }
 
+$randomcode = '0_' . time();
+
 
 include("header.php");
 
@@ -56,7 +58,7 @@ include("header.php");
 
 
 <table>
-<tr><td>Κωδικός: </td><td> <input <?php echo $readonly ?> name="code" type="text" value="<?php echo $code ?>"  size="103" /></td></tr>
+<tr><td>Κωδικός: </td><td> <input <?php echo $readonly ?> name="code" type="text" value="<?php echo strlen($code) ? $code : $randomcode; ?>"  size="103" /></td></tr>
 <tr><td>Επίθετο: </td><td> <input name="name" type="text" value="<?php echo $name ?>"  size="103" /></td></tr>
 <tr><td>Ορισμός: </td><td><input name="definition" type="text" value="<?php echo $definition ?>"  size="103" /></td></tr>
 <tr><td>Παραδείγματα <br/>(διαχωρισμένα με κόμμα):</td><td> <textarea name="examples" cols="102" rows="4"><?php echo $examples ?></textarea> </td></tr>

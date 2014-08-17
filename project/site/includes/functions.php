@@ -231,10 +231,10 @@ function showAdjectives($page, $show=NUM_OF_ADJ_TO_SHOW) {
 	return $adjective_list;
 }
 function getAdjectives($search){
-	$search = mysql_escape_string($search);
+	$search = mysql_escape_string(trim($search));
 
 	$adjective_list=array();
-	$sql="SELECT * FROM adjectives where adjective='$search' ";
+	$sql="SELECT * FROM adjectives where adjective LIKE '$search' ";
 	
 	$result = mysql_query($sql);
 	

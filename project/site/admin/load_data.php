@@ -103,7 +103,7 @@
 			echo '<a class="tooltips" href="adjective.php?code='. $a->code .'">'. $a->code .'<span>'.$a->definition.'</span></a>&nbsp;';
 		}
 	?>
-	</p>
+	. Ακολουθήστε τον σύνδεσμο για να επεξεργαστείτε τον ορισμό.</p>
 	<hr>
 	<?php
 	}	
@@ -111,33 +111,36 @@
 	if (count($adjdefs) ==  0 ) {
 		/* parse error */
 	?>
-				<div id="<?php echo $i;?>">
-				<form method="post" name="<?php echo $i;?>" action="";>
+				<div id="div_<?php echo $i;?>">
+				<form method="post" id="form_<?php echo $i;?>" name="form_<?php echo $i;?>" action="";>
 				<input type="hidden" name="name" value="<?php echo $_GET['adj'];?>" />
 				<table style="border: solid thin black; margin-top: 5px;">
 				<tr><th colspan="2" style="text-align: center;"><?php echo $_GET['adj']; ?></th></tr>
 				<tr><th>Code</th><td><input type="text" name="code" value="<?php echo $code ; ?>" /></td></tr>
 				<tr><th>Ορισμός</th><td><input type="text" name="definition" value="" size="100" /></td></tr>
 				<tr><th>Παράδειγμα</th><td><input type="text" name="examples" value="" size="100" /></td></tr>
-				<tr><td colspan="2" style="text-align: right;"><input type="submit" value="Αποθήκευση" disabled /></td></tr>
-				<table>
+				<tr><td colspan="2" style="text-align: right;"><span class="button" style="cursor: pointer;">Αποθήκευση</span></td></tr>
+				</table>
 				</form>
 				</div>	
 	<?php
 	}
 	foreach($adjdefs as $adjdef) {
 	?>
-				<div id="<?php echo $i;?>">
-				<form method="post" name="<?php echo $i;?>" action="";>
+				<div id="div_<?php echo $i;?>">
+				<form method="post" id="form_<?php echo $i;?>" name="form_<?php echo $i;?>" action="";>
 				<input type="hidden" name="name" value="<?php echo $_GET['adj'];?>" />
-	<!--			<input type="hidden" name="hide" value="<?php echo $hidden;?>" /> -->
 				<table style="border: solid thin black; margin-top: 5px;">
 				<tr><th colspan="2" style="text-align: center;"><?php echo $_GET['adj']; ?></th></tr>
 				<tr><th>Code</th><td><input type="text" name="code" value="<?php echo $code .'_'.$i; ?>" /></td></tr>
 				<tr><th>Ορισμός</th><td><input type="text" name="definition" value="<?php echo $adjdef; ?>" size="100" /></td></tr>
 				<tr><th>Παράδειγμα</th><td><input type="text" name="examples" value="<?php echo $examples[$i]; ?>" size="100" /></td></tr>
-				<tr><td colspan="2" style="text-align: right;"><input type="submit" value="Αποθήκευση" disabled /></td></tr>
-				<table>
+				<tr>
+					<td colspan="2" style="text-align: right;">
+						<span class="button" style="cursor: pointer;">Αποθήκευση</span>
+					</td>
+				</tr>
+				</table>
 				</form>
 				</div>
 	<?php
@@ -145,3 +148,25 @@
 	}
 	
 ?>
+<script>
+	$(function(){
+		$(".button").click(function(){
+			var f = $(this).parents("form");
+			
+			var request = $.ajax({
+				url: "save_data.php",
+				type: "POST",
+				data: f.serialize(),
+				datatype: "html"
+			});
+		
+			request.done(function(msg) {
+				alert(msg);
+			});
+		
+			request.fail(function(jqXHR, textStatus) {
+				alert("Request failed: " + textStatus);
+			});
+		});
+	});
+</script>

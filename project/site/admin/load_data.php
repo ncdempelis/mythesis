@@ -92,7 +92,9 @@
 ?>
 <p style="text-align:center; font-weight:bold; text-decoration: underline;"><?php echo $_GET['adj'];?></p>
 <p style="margin: 1px;"><?php echo $str;?></p>
+<!--
 <p style="margin: 1px;"><span style="font-weight: bold;">Html : </span><?php echo htmlspecialchars($str); ?></p>
+-->
 <hr>
 <?php
 	if (count($adjs_list) ) {

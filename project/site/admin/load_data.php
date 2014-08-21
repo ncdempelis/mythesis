@@ -97,7 +97,7 @@
 <?php
 	if (count($adjs_list) ) {
 	?>
-	<p style="margin: 1px;">Το επίθετο <?php echo $_GET['adj']; ?> υπάρχει ήδη : 
+	<p style="margin: 1px; padding-left: 5px;">Το επίθετο <?php echo $_GET['adj']; ?> υπάρχει ήδη : 
 	<?php
 		foreach($adjs_list as $a ) {
 			echo '<a class="tooltips" href="adjective.php?code='. $a->code .'">'. $a->code .'<span>'.$a->definition.'</span></a>&nbsp;';
